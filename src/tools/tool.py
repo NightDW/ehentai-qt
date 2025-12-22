@@ -539,6 +539,9 @@ class ToolUtil(object):
 
     @staticmethod
     def ParseBookInfo(data):
+        """
+        将作品详情页的HTML代码解析成作品信息
+        """
         soup = BeautifulSoup(data, features="lxml")
         tag = soup.find("div", id="gdd")
         if not tag:
@@ -565,11 +568,21 @@ class ToolUtil(object):
         if mo:
             info.favorites = int(mo.group())
 
-        for tag in soup.find_all("div", class_=re.compile("gdt\w")):
-            url = tag.a.attrs.get('href')
-            index = int(tag.a.img.attrs.get('alt'))
+        # 解析作品详情页里的图片预览图、图片编号及其对应的详情页url
+        for a in soup.find('div', id='gdt').find_all('a'):
+            url = a.attrs.get('href')
+
+            # title格式：Page 1: 1.jpg；可提取冒号前面的数字作为图片编号
+            title = a.div.get('title')
+            index = int(title[0:title.find(':')].lstrip('Page '))
+
+            # 预览图url写在CSS中的background属性中
+            # TODO 这里用的是精灵图，暂不处理
+            style = a.div.get('style')
+            begin = style.find('url(http')
+            preUrl = style[begin+4:style.find(')', begin)]
+
             info.picUrl[index] = url
-            preUrl = tag.a.img.attrs.get("src")
             if preUrl and "ehgt.org/g/blank.gif" not in preUrl:
                 info.preUrl[index] = preUrl
 
