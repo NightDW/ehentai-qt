@@ -8,7 +8,8 @@ from PySide6.QtGui import QImage
 from config import config
 from config.setting import Setting
 from tools.singleton import Singleton
-from ..tools.css import SubSprite
+from src.tools.css import SubSprite
+
 
 class QtTaskQObject(QObject):
     taskBack = Signal(int, bytes)
@@ -108,7 +109,7 @@ class QtTaskBase:
         获取作品图片预览图的缓存key（缓存到本地时会自动拼接上文件后缀名）
         由于图片预览图采用精灵子图形式，为避免重复下载和缓存精灵图，因此采用url作为key
         """
-        uk = SubSprite.parseByUrl(url).url.replace('/', '_')
+        uk = SubSprite.parseByUrl(url).url.replace('/', '_').replace(':', '')
         return "{}/{}_{}_pre_{}".format(site, bookId, token, uk)
 
     # completeCallBack(saveData, taskId, backParam, tick)
