@@ -1,22 +1,14 @@
-import json
 import os
-import pickle
 import threading
-import time
 from queue import Queue
-from zlib import crc32
 
 from PySide6.QtCore import Signal, QObject
 from PySide6.QtGui import QImage
 
 from config import config
 from config.setting import Setting
-from tools.log import Log
-from tools.status import Status
 from tools.singleton import Singleton
-from tools.str import Str
-from tools.tool import CTime, ToolUtil
-
+from ..tools.css import SubSprite
 
 class QtTaskQObject(QObject):
     taskBack = Signal(int, bytes)
@@ -111,8 +103,13 @@ class QtTaskBase:
         return "{}/{}_{}_cover".format(site, bookId, token)
 
     @classmethod
-    def GetPreCoverKey(cls, bookId, token, site, index):
-        return "{}/{}_{}_pre_{}_cover".format(site, bookId, token, index)
+    def GetPreCoverKey(cls, bookId, token, site, url):
+        """
+        获取作品图片预览图的缓存key（缓存到本地时会自动拼接上文件后缀名）
+        由于图片预览图采用精灵子图形式，为避免重复下载和缓存精灵图，因此采用url作为key
+        """
+        uk = SubSprite.parseByUrl(url).url.replace('/', '_')
+        return "{}/{}_{}_pre_{}".format(site, bookId, token, uk)
 
     # completeCallBack(saveData, taskId, backParam, tick)
     def AddConvertTask(self, path, imgData, model, completeCallBack, backParam=None, preDownPath=None, noSaveCache=None):

@@ -222,7 +222,7 @@ class ComicListWidget(BaseListWidget):
         if not widget.isPicture:
             key = self.GetCoverKey(widget.id, widget.token, config.CurSite)
         else:
-            key = self.GetPreCoverKey(widget.id, widget.token, config.CurSite, index+1)
+            key = self.GetPreCoverKey(widget.id, widget.token, config.CurSite, widget.url)
         self.AddDownloadTask(widget.url, key, completeCallBack=self.LoadingPictureComplete, backParam=index)
 
     def LoadingPictureComplete(self, data, status, index):
@@ -231,7 +231,7 @@ class ComicListWidget(BaseListWidget):
             widget = self.itemWidget(item)
             if not widget:
                 return
-            widget.SetPicture(data)
+            widget.SetPicture(data, widget.url)
             assert isinstance(widget, ComicItemWidget)
             if Setting.CoverIsOpenWaifu.value:
                 item = self.item(index)

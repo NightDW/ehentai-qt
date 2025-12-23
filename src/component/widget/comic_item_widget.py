@@ -1,11 +1,12 @@
 from PySide6.QtCore import Qt, QSize, Signal
 from PySide6.QtGui import QPixmap, QIcon, QFont
 from PySide6.QtWidgets import QWidget
-
 from config import config
 from config.setting import Setting
 from interface.ui_comic_item import Ui_ComicItem
 from tools.str import Str
+
+from src.tools.css import SubSprite
 
 
 class ComicItemWidget(QWidget, Ui_ComicItem):
@@ -70,11 +71,21 @@ class ComicItemWidget(QWidget, Ui_ComicItem):
     def GetTitle(self):
         return self.nameLable.text()
 
-    def SetPicture(self, data):
+    def SetPicture(self, data, url: str = ""):
+        """
+        搜索页面展示作品封面列表
+        作品详情页面展示图片预览图列表
+        上面两个页面都会调用本方法来设置图片数据以展示图片
+        :param data: 图片的二进制数据
+        :param url:  可以仅在需要裁剪精灵图时传该参数；默认不裁剪
+        """
         self.picData = data
         pic = QPixmap()
         if data:
             pic.loadFromData(data)
+            # 必要时裁剪出精灵子图
+            if url:
+                pic = SubSprite.parseByUrl(url).cut(pic)
         self.isWaifu2x = False
         self.isWaifu2xLoading = False
         radio = self.devicePixelRatioF()

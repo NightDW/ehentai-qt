@@ -146,6 +146,9 @@ class BookInfoView(QtWidgets.QWidget, Ui_BookInfo, QtTaskBase):
         return
 
     def OpenBookBack(self, data):
+        """
+        当作品信息解析完成后，调用本方法渲染出作品详情页面
+        """
         QtOwner().CloseLoading()
         st = data.get("st")
         if st == Status.Ok:
@@ -170,37 +173,6 @@ class BookInfoView(QtWidgets.QWidget, Ui_BookInfo, QtTaskBase):
             self.categoryList.AddItem(info.baseInfo.category)
             self.commentButton.setText("({})".format(len(info.pageInfo.comment)))
             self.SetTagInfo(info.baseInfo.tags)
-            # for tag in info.baseInfo.tags:
-            #     tagData = tag.split(":")
-            #     if len(tagData) >= 2:
-            #         tagName = tagData[0]
-            #         if not tagName:
-            #             tag = "misc" + tag
-            #
-            #     label = QLabel(tag)
-            #     label.setAlignment(Qt.AlignCenter)
-            #     label.setStyleSheet("color: rgb(196, 95, 125);")
-            #     font = QFont()
-            #     font.setPointSize(12)
-            #     font.setBold(True)
-            #     label.setFont(font)
-
-                # item = QListWidgetItem(self.epsListWidget)
-                # item.setSizeHint(label.sizeHint() + QSize(20, 20))
-
-                # tagData = tag.split(":")
-                # if Setting.Language.autoValue != 3:
-                #     if len(tagData) >= 2:
-                #         tagName = tagData[0]
-                #         if tagName in self.tags:
-                #             if tagData[1] in self.tags.get(tagName, {}).get("data"):
-                #                 tagInfo = self.tags.get(tagName, {}).get("data", {}).get(tagData[1], {})
-                #                 label.setText(self.tags.get(tagName, {}).get("name", "") + ":" + tagInfo.get("dest", ""))
-                #                 item.setToolTip(tagInfo.get('description', ""))
-                #
-                # # item.setToolTip(epsInfo.title)
-                # self.epsListWidget.setItemWidget(item, label)
-                # self.nameToTag[label.text()] = tag
 
             if config.IsLoadingPicture:
                 self.AddDownloadTask(self.url, self.GetCoverKey(self.bookId, self.token, config.CurSite), completeCallBack=self.UpdatePicture, isReload=True)
