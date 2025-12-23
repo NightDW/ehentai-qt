@@ -5,8 +5,7 @@ from config import config
 from config.setting import Setting
 from interface.ui_comic_item import Ui_ComicItem
 from tools.str import Str
-
-from src.tools.css import SubSprite
+from tools.css import SubSprite
 
 
 class ComicItemWidget(QWidget, Ui_ComicItem):

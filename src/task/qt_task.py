@@ -8,7 +8,7 @@ from PySide6.QtGui import QImage
 from config import config
 from config.setting import Setting
 from tools.singleton import Singleton
-from src.tools.css import SubSprite
+from tools.css import SubSprite
 
 
 class QtTaskQObject(QObject):
