@@ -4,6 +4,7 @@ from server.server import Server
 from config import config
 from tools.log import Log
 from tools.singleton import Singleton
+from .css import SubSprite
 
 
 class BookBaseInfo(object):
@@ -39,13 +40,14 @@ class BookPageInfo(object):
         self.posted = ""       # 上传日期
         self.language = ""     # 语言
         self.fileSize = ""     # 大小
-        self.pages = 0        # 分页
+        self.pages = 0         # 分页
         self.favorites = 0     # 收藏数
         self.picUrl = {}       # index: url
         self.preUrl = {}       # index: url
         self.picRealUrl = {}   # 每张图片对应的下载链接
         self.showKey = ""      # 上下切页需要用的，showKey
         self.comment = []
+        self.preSprite: dict[int, SubSprite] = {}
 
     def GetImgKey(self, index):
         if index not in self.picUrl:

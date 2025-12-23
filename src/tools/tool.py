@@ -10,6 +10,7 @@ from config import config
 from config.setting import Setting
 from tools.log import Log
 from tools.status import Status
+from .css import SubSprite
 
 
 class CTime(object):
@@ -576,15 +577,15 @@ class ToolUtil(object):
             title = a.div.get('title')
             index = int(title[0:title.find(':')].lstrip('Page '))
 
-            # 预览图url写在CSS中的background属性中
-            # TODO 这里用的是精灵图，暂不处理
+            # 预览图url写在CSS中的background属性中（精灵子图）
             style = a.div.get('style')
-            begin = style.find('url(http')
-            preUrl = style[begin+4:style.find(')', begin)]
+            sprite = SubSprite.parseByStyle(style)
+            preUrl = sprite.toUrl()
 
             info.picUrl[index] = url
             if preUrl and "ehgt.org/g/blank.gif" not in preUrl:
                 info.preUrl[index] = preUrl
+                info.preSprite[index] = sprite
 
         table = soup.find("table", class_="ptt")
         maxPage = 1
