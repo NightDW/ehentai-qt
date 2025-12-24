@@ -67,8 +67,7 @@ class CommentWidget(QtWidgets.QWidget, Ui_Comment, QtTaskBase):
         for index, v in enumerate(data):
             floor = len(data) - index
             tick, name, comment = v
-            self.listWidget.AddUserItem(ToolUtil.ConvertDate(tick) + "     by "+name, comment, floor)
-        # self.AddHttpTask(self.reqGetComment(self.bookId, self.listWidget.page), self.GetCommnetBack)
+            self.listWidget.AddUserItem(ToolUtil.ConvertDate(tick) + (f"     by {name}" if name else ""), comment, floor)
         return
 
     def SendComment(self):

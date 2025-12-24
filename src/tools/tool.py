@@ -805,7 +805,7 @@ class ToolUtil(object):
             v = data.split(" by")
             timeArray = time.strptime(v[0], "Posted on %d %B %Y, %H:%M")
             tick = time.mktime(timeArray)
-            return tick, v[1]
+            return tick, v[1] if len(v) >= 2 else None
         except Exception as es:
             Log.Error(es)
 
