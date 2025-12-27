@@ -356,12 +356,12 @@ class BookInfoView(QtWidgets.QWidget, Ui_BookInfo, QtTaskBase):
             self.flowHorizontalSpacer = None
 
         for title, contentList in newTagData.items():
-            if Setting.Language.autoValue != 3:
-                if title in self.tags:
-                    title = self.tags.get(title).get("name", "")
-            label = QLabel(title)
-            self.verticalLayout.addWidget(label)
-            self.allFlowLabel.append(label)
+            # if Setting.Language.autoValue != 3:
+            #     if title in self.tags:
+            #         title = self.tags.get(title).get("name", "")
+            # label = QLabel(title)
+            # self.verticalLayout.addWidget(label)
+            # self.allFlowLabel.append(label)
             layout = FlowLayout()
             for tag, text, desc in contentList:
                 box = QPushButton(text)

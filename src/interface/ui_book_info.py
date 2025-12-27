@@ -16,9 +16,9 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QFrame, QGridLayout, QHBoxLayout,
-    QLabel, QListWidgetItem, QPushButton, QScrollArea,
-    QSizePolicy, QSpacerItem, QTabWidget, QToolButton,
-    QVBoxLayout, QWidget)
+    QLabel, QListWidgetItem, QPushButton, QSizePolicy,
+    QSpacerItem, QTabWidget, QToolButton, QVBoxLayout,
+    QWidget)
 
 from component.button.icon_tool_button import IconToolButton
 from component.list.comic_list_widget import ComicListWidget
@@ -63,16 +63,22 @@ class Ui_BookInfo(object):
 "QScrollArea {background-color:transparent;}")
         self.gridLayout_2 = QGridLayout(BookInfo)
         self.gridLayout_2.setObjectName(u"gridLayout_2")
-        self.scrollArea = SmoothScrollArea(BookInfo)
+        self.tabWidget = QTabWidget(BookInfo)
+        self.tabWidget.setObjectName(u"tabWidget")
+        self.tab = QWidget()
+        self.tab.setObjectName(u"tab")
+        self.verticalLayout_2 = QVBoxLayout(self.tab)
+        self.verticalLayout_2.setObjectName(u"verticalLayout_2")
+        self.scrollArea = SmoothScrollArea(self.tab)
         self.scrollArea.setObjectName(u"scrollArea")
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 818, 704))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 794, 658))
         self.verticalLayout_3 = QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
-        self.gridLayout_3 = QGridLayout()
-        self.gridLayout_3.setObjectName(u"gridLayout_3")
+        self.verticalLayout = QVBoxLayout()
+        self.verticalLayout.setObjectName(u"verticalLayout")
         self.horizontalLayout = QHBoxLayout()
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.picture = QLabel(self.scrollAreaWidgetContents)
@@ -219,10 +225,12 @@ class Ui_BookInfo(object):
         self.horizontalLayout.addLayout(self.verticalLayout_6)
 
 
-        self.gridLayout_3.addLayout(self.horizontalLayout, 0, 0, 1, 1)
+        self.verticalLayout.addLayout(self.horizontalLayout)
 
-        self.horizontalLayout_10 = QHBoxLayout()
-        self.horizontalLayout_10.setObjectName(u"horizontalLayout_10")
+        self.horizontalSpacer_3 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.verticalLayout.addItem(self.horizontalSpacer_3)
+
         self.horizontalLayout_2 = QHBoxLayout()
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
         self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
@@ -236,6 +244,10 @@ class Ui_BookInfo(object):
         self.updateTick.setMaximumSize(QSize(160, 20))
 
         self.horizontalLayout_2.addWidget(self.updateTick)
+
+        self.horizontalSpacer_4 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout_2.addItem(self.horizontalSpacer_4)
 
         self.favoriteButton = IconToolButton(self.scrollAreaWidgetContents)
         self.favoriteButton.setObjectName(u"favoriteButton")
@@ -301,63 +313,35 @@ class Ui_BookInfo(object):
         self.horizontalLayout_2.addItem(self.horizontalSpacer)
 
 
-        self.horizontalLayout_10.addLayout(self.horizontalLayout_2)
+        self.verticalLayout.addLayout(self.horizontalLayout_2)
+
+        self.widget = QWidget(self.scrollAreaWidgetContents)
+        self.widget.setObjectName(u"widget")
+        self.verticalLayout_4 = QVBoxLayout(self.widget)
+        self.verticalLayout_4.setObjectName(u"verticalLayout_4")
+
+        self.verticalLayout.addWidget(self.widget)
 
 
-        self.gridLayout_3.addLayout(self.horizontalLayout_10, 1, 0, 1, 1)
+        self.verticalLayout_3.addLayout(self.verticalLayout)
 
+        self.scrollArea.setWidget(self.scrollAreaWidgetContents)
 
-        self.verticalLayout_3.addLayout(self.gridLayout_3)
-
-        self.tabWidget = QTabWidget(self.scrollAreaWidgetContents)
-        self.tabWidget.setObjectName(u"tabWidget")
-        self.tab = QWidget()
-        self.tab.setObjectName(u"tab")
-        self.verticalLayout_2 = QVBoxLayout(self.tab)
-        self.verticalLayout_2.setObjectName(u"verticalLayout_2")
-        self.tagScrollArea = QScrollArea(self.tab)
-        self.tagScrollArea.setObjectName(u"tagScrollArea")
-        self.tagScrollArea.setStyleSheet(u"QPushButton {\n"
-"    background-color:rgb(251, 239, 243);\n"
-"    color: rgb(196, 95, 125);\n"
-"	border:2px solid red;\n"
-"    border-radius: 10px;\n"
-"	border-color:rgb(196, 95, 125);\n"
-"}\n"
-"/* \u9f20\u6807\u5728\u6309\u94ae\u4e0a\u65f6\uff0c\u6309\u94ae\u989c\u8272 */\n"
-" QPushButton:hover \n"
-"{\n"
-"    background-color:rgb(21, 85, 154);\n"
-"    border-radius: 10px;\n"
-"    color: rgb(0, 0, 0);\n"
-"}")
-        self.tagScrollArea.setWidgetResizable(True)
-        self.tagWidgetContents = QWidget()
-        self.tagWidgetContents.setObjectName(u"tagWidgetContents")
-        self.tagWidgetContents.setGeometry(QRect(0, 0, 774, 178))
-        self.verticalLayout = QVBoxLayout(self.tagWidgetContents)
-        self.verticalLayout.setObjectName(u"verticalLayout")
-        self.tagScrollArea.setWidget(self.tagWidgetContents)
-
-        self.verticalLayout_2.addWidget(self.tagScrollArea)
+        self.verticalLayout_2.addWidget(self.scrollArea)
 
         self.tabWidget.addTab(self.tab, "")
         self.tab_2 = QWidget()
         self.tab_2.setObjectName(u"tab_2")
-        self.verticalLayout_4 = QVBoxLayout(self.tab_2)
-        self.verticalLayout_4.setObjectName(u"verticalLayout_4")
+        self.verticalLayout_5 = QVBoxLayout(self.tab_2)
+        self.verticalLayout_5.setObjectName(u"verticalLayout_5")
         self.preListWidget = ComicListWidget(self.tab_2)
         self.preListWidget.setObjectName(u"preListWidget")
 
-        self.verticalLayout_4.addWidget(self.preListWidget)
+        self.verticalLayout_5.addWidget(self.preListWidget)
 
         self.tabWidget.addTab(self.tab_2, "")
 
-        self.verticalLayout_3.addWidget(self.tabWidget)
-
-        self.scrollArea.setWidget(self.scrollAreaWidgetContents)
-
-        self.gridLayout_2.addWidget(self.scrollArea, 0, 0, 1, 1)
+        self.gridLayout_2.addWidget(self.tabWidget, 0, 0, 1, 1)
 
 
         self.retranslateUi(BookInfo)
@@ -367,7 +351,7 @@ class Ui_BookInfo(object):
         self.commentButton.clicked.connect(BookInfo.OpenComment)
         self.clearButton.clicked.connect(BookInfo.ClearCache)
 
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(BookInfo)
@@ -393,7 +377,7 @@ class Ui_BookInfo(object):
         self.downloadButton.setText(QCoreApplication.translate("BookInfo", u"\u4e0b\u8f7d", None))
         self.clearButton.setText(QCoreApplication.translate("BookInfo", u"\u6e05\u7406", None))
         self.startRead.setText(QCoreApplication.translate("BookInfo", u"\u5f00\u59cb\u9605\u8bfb", None))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), QCoreApplication.translate("BookInfo", u"Tags", None))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), QCoreApplication.translate("BookInfo", u"\u57fa\u672c", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QCoreApplication.translate("BookInfo", u"\u9884\u89c8", None))
     # retranslateUi
 
